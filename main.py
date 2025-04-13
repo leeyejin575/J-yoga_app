@@ -5,13 +5,15 @@ import streamlit as st
 import openai
 
 ##### 기능 구현 함수 #####
-def askGpt(prompt,apikey):
-    client = openai.OpenAI(api_key = apikey)
-    response = client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[{"role": "user", "content": prompt}])
+def askGpt(prompt, apikey):
+    openai.api_key = apikey
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role": "user", "content": prompt}]
+    )
     gptResponse = response.choices[0].message.content
     return gptResponse
+
 
 ##### 메인 함수 #####
 def main():
